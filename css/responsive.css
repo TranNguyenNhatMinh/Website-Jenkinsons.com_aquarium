@@ -1,0 +1,261 @@
+/* ============================================
+   Responsive Design Styles
+   ============================================ */
+
+/* Large tablets (992px - 1200px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .aquarium-logo-wrapper {
+        max-width: 280px;
+    }
+    
+    .aquarium-logo-img {
+        max-height: 70px;
+    }
+    
+    .main-menu .nav-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.65rem !important;
+    }
+}
+
+/* Tablet and below (992px) */
+@media (max-width: 991.98px) {
+    /* Header adjustments */
+    .header-main-row {
+        flex-direction: column;
+        align-items: center !important;
+        gap: 1rem !important;
+        padding: 0.8rem 0 !important;
+    }
+    
+    .logo-section {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .aquarium-logo-wrapper {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .aquarium-logo-img {
+        max-width: 100%;
+        height: auto;
+        max-height: 60px;
+    }
+    
+    .main-navigation {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-right: 0;
+        justify-content: center;
+    }
+    
+    .navbar-toggler {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar-collapse {
+        background-color: #f8f9fa;
+        border-radius: var(--radius-lg);
+        padding: 1rem;
+        margin-top: 0.5rem;
+        box-shadow: var(--shadow-md);
+        width: 100%;
+    }
+    
+    .main-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    
+    .main-menu .nav-link {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0.75rem 1rem !important;
+        text-align: left;
+        border-radius: var(--radius-md);
+    }
+    
+    .main-menu .nav-link::before {
+        display: none;
+    }
+    
+    .main-menu .nav-link:hover {
+        transform: translateX(5px);
+        background-color: rgba(0, 134, 179, 0.1);
+    }
+    
+    .main-menu .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile (768px) */
+@media (max-width: 768px) {
+    /* Top bar adjustments */
+    .top-bar-content {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+        padding: 0.3rem 0 !important;
+    }
+    
+    .top-links-nav {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+    }
+    
+    .top-link {
+        font-size: 0.7rem;
+    }
+    
+    .social-links {
+        order: 2;
+        justify-content: center;
+    }
+    
+    /* Header adjustments */
+    .header-main-row {
+        padding: 0.5rem 0 !important;
+        gap: 0.75rem !important;
+    }
+    
+    .aquarium-logo-wrapper {
+        max-width: 220px;
+    }
+    
+    .aquarium-logo-img {
+        max-height: 50px;
+    }
+    
+    .navbar-collapse {
+        padding: 0.75rem;
+    }
+    
+    .main-menu .nav-link {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.75rem !important;
+    }
+    
+    /* Hero section */
+    .hero-section {
+        min-height: 400px;
+        padding: 60px 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .feature-card {
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+/* Small Mobile (576px) */
+@media (max-width: 575.98px) {
+    /* Top bar - stack vertically */
+    .top-bar-content {
+        flex-direction: column;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        padding: 0.4rem 0 !important;
+    }
+    
+    .top-links-nav {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+    }
+    
+    .top-link {
+        font-size: 0.65rem;
+    }
+    
+    /* Hide some top bar items on very small screens */
+    .top-link span.d-none.d-sm-inline {
+        display: none !important;
+    }
+    
+    .social-links {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+    
+    .search-btn {
+        order: 3;
+        margin-top: 0.25rem;
+    }
+    
+    /* Header adjustments */
+    .header-main-row {
+        padding: 0.4rem 0 !important;
+        gap: 0.5rem !important;
+    }
+    
+    .aquarium-logo-wrapper {
+        max-width: 180px;
+    }
+    
+    .aquarium-logo-img {
+        max-height: 45px;
+    }
+    
+    .navbar-collapse {
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+    }
+    
+    .main-menu .nav-link {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    /* Hero section */
+    .hero-section {
+        min-height: 350px;
+        padding: 40px 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem;
+    }
+    
+    .hero-section .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px 30px;
+    }
+    
+    .hero-section .d-flex {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}

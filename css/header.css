@@ -1,0 +1,734 @@
+/* ============================================
+   Header Component Styles
+   ============================================ */
+
+/* Main Header */
+.main-header {
+    background-color: #ffffff;
+    box-shadow: var(--shadow-header);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow var(--transition-base);
+}
+
+.main-header:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Top Links Bar */
+.top-links-bar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef !important;
+    position: relative;
+}
+
+.top-links-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 134, 179, 0.2), transparent);
+}
+
+.top-bar-content {
+    min-height: 0px;
+    padding: 0.4rem 0 !important;
+    gap: 0.75rem !important;
+}
+
+/* Override Bootstrap py-2 class */
+.top-bar-content.py-2 {
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+}
+
+/* Top Navigation Links - Match Navbar Style Exactly */
+.top-link {
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-dark) !important;
+    transition: all var(--transition-bezier);
+    position: relative;
+    text-transform: uppercase;
+}
+
+.top-links-nav .top-link {
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+    transition: all var(--transition-bezier);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-dark) !important;
+    text-transform: uppercase;
+}
+
+.top-links-nav .top-link:hover {
+    background-color: rgba(0, 134, 179, 0.05);
+    transform: translateY(-1px);
+}
+
+.top-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--aqua-color);
+    transition: width var(--transition-base);
+}
+
+.top-link:hover::after {
+    width: 100%;
+}
+
+.top-link:hover {
+    color: var(--text-dark) !important;
+    text-decoration: none;
+}
+
+/* Ensure all top bar text matches navbar exactly */
+.top-bar-content .top-link,
+.top-bar-content .top-link span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text-dark) !important;
+    text-transform: uppercase;
+}
+
+.top-link:focus-visible {
+    outline: 2px solid var(--aqua-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+/* Text Color Utilities */
+.text-aqua {
+    color: var(--aqua-color) !important;
+}
+
+.text-pink {
+    color: var(--pink-color) !important;
+}
+
+/* Icons in Top Bar */
+.top-link i {
+    font-size: 1.1rem;
+    transition: all var(--transition-bezier);
+    display: inline-flex;
+    align-items: center;
+}
+
+.top-link:hover i {
+    transform: scale(1.15) translateY(-1px);
+}
+
+.calendar-icon,
+.lang-icon {
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.calendar-icon i {
+    font-size: 1rem;
+    transition: transform var(--transition-base);
+}
+
+.top-link:hover .calendar-icon i {
+    transform: rotate(5deg);
+}
+
+/* Social Links */
+.social-links {
+    gap: 0.25rem !important;
+}
+
+.social-links .top-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-base);
+}
+
+.social-links .top-link:hover {
+    background-color: #f8f9fa;
+    text-decoration: none;
+    transform: scale(1.1);
+}
+
+.social-links .top-link i {
+    font-size: 1.1rem;
+    transition: color var(--transition-base);
+}
+
+/* Facebook Icon */
+.social-links .fa-facebook-f {
+    color: var(--facebook-color) !important;
+}
+
+.social-links .top-link:hover .fa-facebook-f {
+    color: var(--facebook-color) !important;
+}
+
+.social-links .top-link:first-of-type:hover {
+    background-color: rgba(24, 119, 242, 0.1);
+}
+
+/* Instagram Icon */
+.social-links .fa-instagram {
+    color: var(--instagram-color) !important;
+}
+
+.social-links .top-link:hover .fa-instagram {
+    color: var(--instagram-color) !important;
+}
+
+.social-links .top-link:nth-of-type(2):hover {
+    background-color: rgba(228, 64, 95, 0.1);
+}
+
+/* Twitter/X Icon */
+.social-links .fa-twitter,
+.social-links .fa-x-twitter {
+    color: var(--twitter-color) !important;
+}
+
+.social-links .top-link:hover .fa-twitter,
+.social-links .top-link:hover .fa-x-twitter {
+    color: var(--twitter-color) !important;
+}
+
+.social-links .top-link:nth-of-type(3):hover {
+    background-color: rgba(29, 161, 242, 0.1);
+}
+
+/* YouTube Icon */
+.social-links .fa-youtube {
+    color: var(--youtube-color) !important;
+}
+
+.social-links .top-link:hover .fa-youtube {
+    color: var(--youtube-color) !important;
+}
+
+.social-links .top-link:last-of-type:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Search Button */
+.search-btn {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    transition: all var(--transition-bezier);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+}
+
+.search-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color var(--transition-base);
+}
+
+.search-btn:hover {
+    color: var(--aqua-color);
+    background-color: rgba(0, 134, 179, 0.1);
+    transform: scale(1.1);
+}
+
+.search-btn:active {
+    transform: scale(0.95);
+}
+
+.search-btn:focus-visible {
+    outline: 2px solid var(--aqua-color);
+    outline-offset: 2px;
+}
+
+/* Header Main Content */
+.main-header-content {
+    background-color: #ffffff;
+    position: relative;
+}
+
+.header-main-row {
+    min-height: 0px;
+    align-items: center;
+    padding: 0.6rem 0 !important;
+    gap: 2rem !important;
+    justify-content: space-between;
+}
+
+/* Override Bootstrap py-3 class */
+.header-main-row.py-3 {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+}
+
+/* Logo size */
+.aquarium-logo-wrapper {
+    max-width: 320px;
+}
+
+.aquarium-logo-img {
+    max-height: 75px;
+    object-fit: contain;
+}
+
+.logo-section {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Logo Styles */
+.aquarium-logo-wrapper {
+    display: flex;
+    align-items: center;
+    transition: transform var(--transition-bezier);
+    max-width: 300px;
+    height: auto;
+}
+
+.aquarium-logo-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.aquarium-logo-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: filter var(--transition-base);
+}
+
+.aquarium-logo-wrapper:hover .aquarium-logo-img {
+    filter: brightness(1.05);
+}
+
+/* Main Navigation */
+.main-navigation {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Align navbar with search button column - match container padding */
+@media (min-width: 992px) {
+    .header-main-row .container {
+        position: relative;
+    }
+    
+    .main-navigation {
+        padding-right: 0;
+        margin-right: 0;
+    }
+    
+    .main-menu {
+        margin-right: 0;
+        padding-right: 0;
+        gap: 0.5rem;
+    }
+    
+    /* Ensure navbar aligns with search button above - match right edge */
+    .main-navigation .navbar-collapse {
+        padding-right: 0;
+        margin-right: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    /* Align last navbar item with search button column - ensure it's flush right */
+    .main-menu .nav-item:last-child .nav-link {
+        margin-right: 0;
+        padding-right: 0 !important;
+    }
+    
+    .main-menu .nav-link {
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    /* Match container padding to align with search button */
+    .main-navigation {
+        position: relative;
+    }
+    
+    /* Ensure menu items align to container edge matching search button */
+    .main-menu {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Ensure navbar is visible on desktop */
+@media (min-width: 992px) {
+    #mainMenuCollapse {
+        display: flex !important;
+        flex-basis: auto;
+        height: auto !important;
+        visibility: visible !important;
+        padding-right: 0;
+        margin-right: 0;
+    }
+    
+    .navbar-toggler {
+        display: none !important;
+    }
+    
+    .main-navigation .collapse:not(.show) {
+        display: flex !important;
+    }
+    
+    /* Align navbar menu items to right edge matching search button */
+    .main-navigation {
+        align-items: flex-end;
+    }
+}
+
+.navbar-toggler {
+    border: 2px solid var(--text-muted);
+    padding: var(--spacing-sm) 0.75rem;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+    background-color: transparent;
+}
+
+.navbar-toggler:hover {
+    border-color: var(--aqua-color);
+    background-color: rgba(0, 134, 179, 0.05);
+}
+
+.navbar-toggler-icon {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus-visible {
+    outline: 2px solid var(--aqua-color);
+    outline-offset: 2px;
+}
+
+.main-menu {
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+}
+
+.main-menu .nav-link {
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+    color: var(--text-dark) !important;
+    transition: all var(--transition-bezier);
+    padding: 0.75rem var(--spacing-md) !important;
+    border-radius: var(--radius-md);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* Đảm bảo dropdown không bị mất khi di chuột */
+.dropdown-hover {
+    position: static;
+}
+
+@media (min-width: 992px) {
+    .dropdown-hover {
+        position: relative;
+    }
+}
+
+.main-menu .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--aqua-color);
+    transition: width var(--transition-base);
+}
+
+.main-menu .nav-link:hover {
+    color: var(--aqua-color) !important;
+    background-color: rgba(0, 134, 179, 0.05);
+    transform: translateY(-2px);
+}
+
+.main-menu .nav-link:hover::before {
+    width: calc(100% - 2rem);
+}
+
+.menu-caret {
+    font-size: 0.65rem;
+    margin-left: 2px;
+    vertical-align: middle;
+    transition: transform var(--transition-bezier);
+    display: inline-block;
+}
+
+.main-menu .nav-link:hover .menu-caret {
+    transform: translateY(3px);
+}
+
+.main-menu .nav-link i {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity var(--transition-base);
+}
+
+.main-menu .nav-link:hover i {
+    opacity: 1;
+}
+
+.main-menu .nav-link:focus-visible {
+    outline: 2px solid var(--aqua-color);
+    outline-offset: 2px;
+}
+
+/* Visit Dropdown Mega Menu - Hover Effect */
+.nav-item.dropdown-hover {
+    position: relative;
+}
+
+.dropdown-hover .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    padding: 0.5rem 0;
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-top: 0;
+    padding-top: 0.5rem;
+    z-index: 1000;
+    list-style: none;
+}
+
+/* Hiển thị dropdown khi hover vào parent hoặc chính dropdown */
+.dropdown-hover:hover .dropdown-menu,
+.dropdown-hover .dropdown-menu:hover {
+    display: block;
+    animation: fadeInDown 0.3s ease;
+}
+
+/* Tạo vùng an toàn để di chuột từ parent xuống dropdown */
+.dropdown-hover .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.visit-mega-menu .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    transition: all var(--transition-base);
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.visit-mega-menu .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.visit-mega-menu .dropdown-item:hover {
+    background-color: rgba(0, 134, 179, 0.05);
+    color: var(--aqua-color);
+    padding-left: 2rem;
+}
+
+/* Join Our Team Submenu */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu.submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 0.5rem;
+    margin-top: 0;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    padding: 0.5rem 0;
+    list-style: none;
+    z-index: 1001;
+}
+
+.dropdown-submenu:hover > .dropdown-menu.submenu,
+.dropdown-submenu > .dropdown-menu.submenu:hover {
+    display: block;
+    animation: fadeInRight 0.3s ease;
+}
+
+/* Đảm bảo dropdown vẫn hiển thị khi hover vào các items */
+.dropdown-hover .dropdown-menu li:hover .dropdown-menu.submenu {
+    display: block;
+}
+
+/* JOIN OUR TEAM submenu - icon mũi tên sang phải */
+.visit-mega-menu .dropdown-submenu > .dropdown-item {
+    position: relative;
+    padding-right: 2.5rem !important;
+}
+
+.visit-mega-menu .dropdown-submenu > .dropdown-item .join-team-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    color: var(--aqua-color);
+    transition: transform var(--transition-base);
+    opacity: 0.7;
+}
+
+.visit-mega-menu .dropdown-submenu:hover > .dropdown-item .join-team-arrow {
+    transform: translateY(-50%) translateX(4px);
+    opacity: 1;
+}
+
+/* Đảm bảo submenu vẫn hiển thị khi hover vào các items bên trong */
+.dropdown-submenu:hover .submenu,
+.dropdown-submenu .submenu:hover,
+.dropdown-submenu .submenu li:hover,
+.dropdown-submenu .submenu li:hover .submenu {
+    display: block !important;
+}
+
+.visit-mega-menu .dropdown-submenu .submenu li {
+    position: relative;
+}
+
+/* Tạo vùng an toàn để di chuyển chuột từ parent sang submenu */
+.dropdown-submenu > .dropdown-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -10px;
+    width: 20px;
+    height: 100%;
+    background: transparent;
+    z-index: 1000;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.dropdown-submenu > .dropdown-item:hover {
+    background-color: rgba(0, 134, 179, 0.1);
+    color: var(--aqua-color);
+}
+
+.submenu .dropdown-item {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+}
+
+.submenu .dropdown-item:hover {
+    background-color: rgba(0, 134, 179, 0.05);
+    color: var(--aqua-color);
+    padding-left: 2rem;
+}
+
+
+/* Active state for Visit dropdown */
+.dropdown-hover:hover > .nav-link {
+    color: var(--aqua-color) !important;
+}
+
+/* Responsive dropdown */
+@media (max-width: 991.98px) {
+    .dropdown-hover .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        margin-top: 0;
+        padding-left: 1rem;
+    }
+    
+    .dropdown-submenu > .dropdown-menu.submenu {
+        position: static;
+        margin-left: 1rem;
+        box-shadow: none;
+        border-left: 2px solid var(--aqua-color);
+        padding-left: 1rem;
+    }
+}
