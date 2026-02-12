@@ -1,0 +1,236 @@
+/* ============================================
+   AUTH PAGES - Minimal & Professional
+   ============================================ */
+
+body.auth-page {
+    background: #f8fafc;
+    min-height: 100vh;
+    font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+}
+
+.auth-container {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.auth-container .container {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Register form needs more width for 2 columns */
+body.auth-page.auth-register .auth-container .container {
+    max-width: 560px;
+}
+
+.auth-container .row {
+    margin: 0;
+    justify-content: center;
+}
+
+.auth-container .col-12 {
+    padding: 0;
+}
+
+/* Single card - clean & centered */
+.auth-bar {
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    padding: 2.5rem 2rem;
+    margin: 0 auto;
+}
+
+/* Hide left panel when present (legacy structure) */
+.auth-bar-left {
+    display: none;
+}
+
+/* Form section - full width */
+.auth-bar-right {
+    flex: 1;
+    padding: 0;
+    min-width: auto;
+    background: transparent;
+}
+
+.auth-bar-right h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auth-bar-right h3 i {
+    color: #64748b;
+    font-size: 1.25rem;
+}
+
+.auth-bar-right .subtitle-small {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Form */
+.auth-form .form-label {
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auth-form .form-label i {
+    color: #94a3b8;
+    width: 16px;
+    font-size: 0.875rem;
+}
+
+.auth-form .form-control {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    background: #fff;
+    color: #1e293b;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-form .form-control:focus {
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+    outline: none;
+}
+
+.auth-form .form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Button - simple & professional */
+.auth-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    background: #0f172a;
+    color: #fff;
+    transition: background 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.auth-btn:hover {
+    background: #1e293b;
+}
+
+.auth-btn:active {
+    background: #334155;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.5;
+}
+
+.alert-danger {
+    background: #fef2f2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.alert-info {
+    background: #f0f9ff;
+    color: #0369a1;
+    border-color: #bae6fd;
+}
+
+.alert i {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+/* Links */
+.auth-link {
+    color: #0ea5e9;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.auth-footer p {
+    margin: 0;
+}
+
+.text-muted {
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.text-danger {
+    color: #dc2626;
+}
+
+/* Spacing for form groups */
+.auth-form .mb-4 {
+    margin-bottom: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 575.98px) {
+    .auth-bar {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .auth-bar-right h3 {
+        font-size: 1.25rem;
+    }
+
+    .auth-form .row {
+        flex-direction: column;
+    }
+
+    .auth-form .col-md-6 {
+        width: 100%;
+    }
+}
