@@ -4,26 +4,26 @@ require_once '../includes/functions.php';
 
 requireAdmin();
 
-// Lấy thống kê
+// Fetch stats
 $conn = getDBConnection();
 
-// Tổng số đơn hàng
+// Total orders
 $result = $conn->query("SELECT COUNT(*) as total FROM orders");
 $total_orders = $result->fetch_assoc()['total'];
 
-// Tổng doanh thu
+// Total revenue
 $result = $conn->query("SELECT SUM(total_amount) as total FROM orders WHERE payment_status = 'paid'");
 $total_revenue = $result->fetch_assoc()['total'] ?? 0;
 
-// Tổng số sản phẩm
+// Total products
 $result = $conn->query("SELECT COUNT(*) as total FROM products");
 $total_products = $result->fetch_assoc()['total'];
 
-// Tổng số user
+// Total users
 $result = $conn->query("SELECT COUNT(*) as total FROM users WHERE role = 'customer'");
 $total_users = $result->fetch_assoc()['total'];
 
-// Đơn hàng gần đây
+// Recent orders
 $result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC LIMIT 10");
 $recent_orders = [];
 while ($row = $result->fetch_assoc()) {
@@ -33,7 +33,7 @@ while ($row = $result->fetch_assoc()) {
 $conn->close();
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,10 @@ $conn->close();
             <!-- Main Content -->
             <div class="admin-content">
                 <div class="admin-header">
-                    <h2><i class="fa-solid fa-chart-line me-2"></i>Dashboard</h2>
+                    <button type="button" class="admin-menu-toggle" id="adminMenuToggle" aria-label="Open menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h2><i class="fa-solid fa-chart-line"></i> Dashboard</h2>
                 </div>
                 
                 <!-- Statistics -->
@@ -62,7 +65,7 @@ $conn->close();
                             <div class="stat-card-icon">
                                 <i class="fa-solid fa-shopping-cart"></i>
                             </div>
-                            <h5>Tổng đơn hàng</h5>
+                            <h5>Total Orders</h5>
                             <h2><?php echo $total_orders; ?></h2>
                         </div>
                     </div>
@@ -71,7 +74,7 @@ $conn->close();
                             <div class="stat-card-icon">
                                 <i class="fa-solid fa-dollar-sign"></i>
                             </div>
-                            <h5>Doanh thu</h5>
+                            <h5>Revenue</h5>
                             <h2><?php echo formatCurrency($total_revenue); ?></h2>
                         </div>
                     </div>
@@ -80,7 +83,7 @@ $conn->close();
                             <div class="stat-card-icon">
                                 <i class="fa-solid fa-box"></i>
                             </div>
-                            <h5>Sản phẩm</h5>
+                            <h5>Products</h5>
                             <h2><?php echo $total_products; ?></h2>
                         </div>
                     </div>
@@ -89,7 +92,7 @@ $conn->close();
                             <div class="stat-card-icon">
                                 <i class="fa-solid fa-users"></i>
                             </div>
-                            <h5>Khách hàng</h5>
+                            <h5>Customers</h5>
                             <h2><?php echo $total_users; ?></h2>
                         </div>
                     </div>
@@ -97,21 +100,19 @@ $conn->close();
                 
                 <!-- Recent Orders -->
                 <div class="admin-table">
-                    <div class="card-header" style="padding: 1.5rem; background: white; border-bottom: 2px solid #f0f0f0;">
-                        <h5 style="margin: 0; font-weight: 700; color: #1e3a5f;">
-                            <i class="fa-solid fa-clock me-2"></i>Đơn hàng gần đây
-                        </h5>
+                    <div class="admin-table-header">
+                        <i class="fa-solid fa-clock"></i> Recent Orders
                     </div>
                     <div class="table-responsive">
                         <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Mã đơn</th>
-                                        <th>Khách hàng</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Trạng thái</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Thao tác</th>
+                                        <th>Order #</th>
+                                        <th>Customer</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,14 +123,14 @@ $conn->close();
                                             <td><?php echo formatCurrency($order['total_amount']); ?></td>
                                             <td>
                                                 <span class="badge bg-warning"><?php 
-                                                    $status_labels = ['pending' => 'Chờ xử lý', 'processing' => 'Đang xử lý', 'shipped' => 'Đã giao hàng', 'delivered' => 'Đã nhận hàng', 'cancelled' => 'Đã hủy'];
+                                                    $status_labels = ['pending' => 'Pending', 'processing' => 'Processing', 'shipped' => 'Shipped', 'delivered' => 'Delivered', 'cancelled' => 'Cancelled'];
                                                     echo $status_labels[$order['order_status']] ?? $order['order_status'];
                                                 ?></span>
                                             </td>
                                             <td><?php echo date('d/m/Y H:i', strtotime($order['created_at'])); ?></td>
                                             <td>
                                                 <a href="order_detail.php?id=<?php echo $order['order_id']; ?>" class="admin-btn admin-btn-primary admin-btn-sm">
-                                                    <i class="fa-solid fa-eye me-1"></i>Xem
+                                                    <i class="fa-solid fa-eye"></i> View
                                                 </a>
                                             </td>
                                         </tr>

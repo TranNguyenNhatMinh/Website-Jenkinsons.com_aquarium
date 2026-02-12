@@ -1,7 +1,7 @@
 <?php
 /**
  * Test Registration - Debug tool
- * File này để test và debug đăng ký
+ * This file is for testing and debugging registration
  */
 
 error_reporting(E_ALL);

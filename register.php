@@ -2,7 +2,6 @@
 require_once 'includes/auth.php';
 require_once 'includes/functions.php';
 
-// Redirect nếu đã đăng nhập
 if (isLoggedIn()) {
     header('Location: index.php');
     exit();
@@ -11,25 +10,19 @@ if (isLoggedIn()) {
 $error = '';
 $success = '';
 
-// Xử lý đăng ký
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
-    // Debug mode
     $debug_mode = isset($_GET['debug']);
-    
     if ($debug_mode) {
-        echo "<pre>POST data: ";
-        print_r($_POST);
-        echo "</pre>";
+        echo "<pre>POST data: "; print_r($_POST); echo "</pre>";
     }
-    
+
     $username = sanitize($_POST['username'] ?? '');
     $email = sanitize($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     $full_name = sanitize($_POST['full_name'] ?? '');
     $phone = sanitize($_POST['phone'] ?? '');
-    
-    // Validation
+
     if (empty($username) || empty($email) || empty($password)) {
         $error = 'Please fill in all required fields';
     } elseif ($password !== $confirm_password) {
@@ -39,25 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Invalid email address';
     } else {
-        // Call register function
         $result = register($username, $email, $password, $full_name, $phone);
-        
         if ($result['success']) {
             if (!isset($_GET['test'])) {
                 header('Location: index.php');
                 exit();
-            } else {
-                $success = 'Registration successful! (Test mode - no redirect)';
             }
+            $success = 'Registration successful! (Test mode - no redirect)';
         } else {
-            if (strpos($result['message'], 'đã tồn tại') !== false || strpos($result['message'], 'already exists') !== false) {
+            if (strpos($result['message'], 'already exists') !== false) {
                 $error = 'Username or email already exists';
             } else {
                 $error = 'Registration failed. Please try again.';
             }
-            // Log error
             error_log("Registration error: " . $result['message']);
-            
             if ($debug_mode) {
                 $error .= "<br><small style='color: #666;'>Debug: " . htmlspecialchars($result['message']) . "</small>";
             }
@@ -76,77 +64,97 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/auth.css">
 </head>
-<body class="auth-page auth-register">
+<body class="auth-page">
     <?php include 'includes/header.php'; ?>
-    
+
     <div class="auth-container">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 d-flex justify-content-center">
                     <div class="auth-bar">
+                        <div class="auth-bar-left">
+                            <div class="auth-bar-left-content">
+                                <h2>Join Us</h2>
+                                <div class="subtitle">Create your account and dive into amazing experiences</div>
+                                <div class="aquarium-features">
+                                    <div class="feature-item">
+                                        <i class="fa-solid fa-star"></i>
+                                        <span>Free Account</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fa-solid fa-percent"></i>
+                                        <span>Special Discounts</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fa-solid fa-bell"></i>
+                                        <span>Event Notifications</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fa-solid fa-heart"></i>
+                                        <span>Unique Experiences</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="auth-bar-right">
-                            <h3>Create account</h3>
+                            <h3><i class="fa-solid fa-user-plus"></i> Create New Account</h3>
                             <div class="subtitle-small">Fill in your information to get started</div>
-                            
+
                             <?php if ($error): ?>
                                 <div class="alert alert-danger">
                                     <i class="fa-solid fa-exclamation-circle"></i>
-                                    <span><?php echo htmlspecialchars($error); ?></span>
-                                    <?php if (isset($_GET['debug'])): ?>
-                                        <br><small>Debug: Check PHP error log</small>
-                                    <?php endif; ?>
+                                    <div><strong>Error:</strong> <?php echo $error; ?></div>
                                 </div>
                             <?php endif; ?>
                             <?php if ($success): ?>
                                 <div class="alert alert-success">
                                     <i class="fa-solid fa-check-circle"></i>
-                                    <span><?php echo htmlspecialchars($success); ?></span>
+                                    <div><?php echo htmlspecialchars($success); ?></div>
                                 </div>
                             <?php endif; ?>
                             <?php if (isset($_GET['test'])): ?>
                                 <div class="alert alert-info">
                                     <i class="fa-solid fa-info-circle"></i>
-                                    <span>Test mode: form will not redirect.</span>
+                                    <div><strong>Test mode:</strong> Form will submit but not redirect.</div>
                                 </div>
                             <?php endif; ?>
 
                             <form method="POST" action="" id="registerForm" class="auth-form">
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                        <label for="username" class="form-label"><i class="fa-solid fa-user"></i> Username <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                        <label for="email" class="form-label"><i class="fa-solid fa-envelope"></i> Email Address <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Min. 6 characters" required minlength="6">
-                                        <small class="text-muted">Minimum 6 characters</small>
+                                        <label for="password" class="form-label"><i class="fa-solid fa-lock"></i> Password <span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="confirm_password" class="form-label">Confirm password <span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                                        <label for="confirm_password" class="form-label"><i class="fa-solid fa-lock"></i> Confirm Password <span class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
-                                        <label for="full_name" class="form-label">Full name</label>
-                                        <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Full name">
+                                        <label for="full_name" class="form-label"><i class="fa-solid fa-id-card"></i> Full Name</label>
+                                        <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter your full name">
                                     </div>
                                     <div class="col-md-6 mb-4">
-                                        <label for="phone" class="form-label">Phone</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone number">
+                                        <label for="phone" class="form-label"><i class="fa-solid fa-phone"></i> Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="(123) 456-7890">
                                     </div>
                                 </div>
-                                <button type="submit" name="register" class="auth-btn">Create account</button>
+                                <button type="submit" name="register" class="auth-btn"><i class="fa-solid fa-user-plus me-2"></i>Create Account</button>
                             </form>
 
                             <div class="auth-footer">
-                                <p class="mb-0">Already have an account? <a href="login.php" class="auth-link">Sign in</a></p>
+                                <p class="mb-0">Already have an account? <a href="login.php" class="auth-link">Sign In</a></p>
                             </div>
                         </div>
                     </div>
@@ -154,17 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
             </div>
         </div>
     </div>
-    
+
     <?php include 'includes/footer.php'; ?>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Debug: Log form submission
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            console.log('Form submitting...');
-            console.log('Username:', document.getElementById('username').value);
-            console.log('Email:', document.getElementById('email').value);
-        });
-    </script>
 </body>
 </html>

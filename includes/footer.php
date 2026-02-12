@@ -1,11 +1,11 @@
 <?php
 // includes/footer.php
 ?>
-    <!-- Footer - nội dung theo trang (Aquarium / Boardwalk / Sweet Shop) -->
+    <!-- Footer - content per page (Aquarium / Boardwalk / Sweet Shop) -->
     <footer class="boardwalk-footer text-white pt-5 pb-4">
         <div class="container">
             <div class="row footer-row align-items-start">
-                <!-- Column 1: Logo theo trang -->
+                <!-- Column 1: Logo per page -->
                 <div class="col-md-3 col-sm-6">
                     <div class="boardwalk-logo mb-3 text-center text-md-start">
                         <div class="boardwalk-logo-text mb-2">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <!-- Column 2: Visit - nội dung theo trang -->
+                <!-- Column 2: Visit - content per page -->
                 <div class="col-md-3 col-sm-6">
                     <?php if (isset($currentSite) && $currentSite === 'sweet-shop'): ?>
                         <h6 class="mb-3 fw-bold hover-link">Visit the Sweet Shop</h6>
@@ -49,7 +49,7 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Column 3: Plan Your Visit - links theo trang -->
+                <!-- Column 3: Plan Your Visit - links per page -->
                 <div class="col-md-3 col-sm-6">
                     <h6 class="mb-3 fw-bold plan-visit-heading">Plan Your Visit</h6>
                     <ul class="list-unstyled small mb-0">

@@ -9,7 +9,7 @@ USE `eproject2_db`;
 
 -- ============================================
 -- TABLE: users
--- Quản lý người dùng (admin và customer)
+-- User management (admin and customer)
 -- ============================================
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- ============================================
 -- TABLE: categories
--- Danh mục sản phẩm (Aquarium, Boardwalk, Sweet Shop)
+-- Product categories (Aquarium, Boardwalk, Sweet Shop)
 -- ============================================
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` INT(11) NOT NULL AUTO_INCREMENT,

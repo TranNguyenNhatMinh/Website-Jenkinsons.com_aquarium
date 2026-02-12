@@ -1,113 +1,113 @@
-da# Backend System - Hướng dẫn sử dụng
+# Backend System - User Guide
 
-## Tổng quan
+## Overview
 
-Hệ thống backend đã được tích hợp vào website với các tính năng:
-- Đăng ký / Đăng nhập
-- Quản lý giỏ hàng
-- Đặt hàng và thanh toán
-- Admin panel để quản lý sản phẩm, đơn hàng, danh mục
+The backend system is integrated into the website with the following features:
+- Registration / Login
+- Cart management
+- Checkout and payment
+- Admin panel to manage products, orders, and categories
 
 ## Database
 
 - **Database name:** `project_data`
-- **File SQL:** `database/eproject2_database.sql` (đã import vào phpMyAdmin)
+- **SQL file:** `database/eproject2_database.sql` (import into phpMyAdmin)
 - **Config:** `database/config.php`
 
-## Cấu trúc file
+## File Structure
 
 ### Core Files
-- `database/config.php` - Cấu hình kết nối database
+- `database/config.php` - Database connection configuration
 - `includes/auth.php` - Authentication functions (login, register, logout)
 - `includes/functions.php` - Helper functions (products, cart, orders)
 
 ### User Pages
-- `login.php` - Trang đăng nhập
-- `register.php` - Trang đăng ký
-- `logout.php` - Đăng xuất
-- `cart.php` - Giỏ hàng
-- `checkout.php` - Thanh toán
-- `order_success.php` - Xác nhận đơn hàng
-- `my_orders.php` - Danh sách đơn hàng của user
-- `order_detail.php` - Chi tiết đơn hàng
-- `add_to_cart.php` - Thêm sản phẩm vào giỏ hàng (POST)
+- `login.php` - Login page
+- `register.php` - Registration page
+- `logout.php` - Logout
+- `cart.php` - Shopping cart
+- `checkout.php` - Checkout
+- `order_success.php` - Order confirmation
+- `my_orders.php` - User order list
+- `order_detail.php` - Order details
+- `add_to_cart.php` - Add product to cart (POST)
 
 ### Admin Panel
 - `admin/index.php` - Dashboard
-- `admin/products.php` - Quản lý sản phẩm
-- `admin/orders.php` - Quản lý đơn hàng
-- `admin/order_detail.php` - Chi tiết đơn hàng (admin)
-- `admin/categories.php` - Quản lý danh mục
+- `admin/products.php` - Manage products
+- `admin/orders.php` - Manage orders
+- `admin/order_detail.php` - Order details (admin)
+- `admin/categories.php` - Manage categories
 
-## Thông tin đăng nhập mặc định
+## Default Login
 
 ### Admin Account:
 - **Username:** `admin`
 - **Password:** `admin123`
-- ⚠️ **QUAN TRỌNG:** Đổi mật khẩu ngay sau khi đăng nhập!
+- ⚠️ **IMPORTANT:** Change the password after first login!
 
-## Cách sử dụng
+## How to Use
 
-### 1. Đăng ký tài khoản mới
-- Vào `register.php`
-- Điền thông tin và đăng ký
-- Tự động đăng nhập sau khi đăng ký
+### 1. Register a new account
+- Go to `register.php`
+- Fill in the form and register
+- You will be logged in automatically after registration
 
-### 2. Đăng nhập
-- Vào `login.php`
-- Nhập username/email và password
-- Sau khi đăng nhập, admin sẽ được redirect đến `admin/index.php`
-- User thường sẽ ở lại trang hiện tại hoặc về `index.php`
+### 2. Log in
+- Go to `login.php`
+- Enter username/email and password
+- After login, admin users are redirected to `admin/index.php`
+- Regular users stay on the current page or go to `index.php`
 
-### 3. Thêm sản phẩm vào giỏ hàng
-- Từ trang sản phẩm, submit form POST đến `add_to_cart.php`:
+### 3. Add product to cart
+- From a product page, submit a POST form to `add_to_cart.php`:
 ```html
 <form method="POST" action="add_to_cart.php">
     <input type="hidden" name="product_id" value="1">
     <input type="hidden" name="quantity" value="1">
     <input type="hidden" name="redirect" value="current_page.php">
-    <button type="submit">Thêm vào giỏ hàng</button>
+    <button type="submit">Add to Cart</button>
 </form>
 ```
 
-### 4. Xem giỏ hàng
-- Click vào icon giỏ hàng ở header
-- Hoặc vào `cart.php`
-- Có thể cập nhật số lượng hoặc xóa sản phẩm
+### 4. View cart
+- Click the cart icon in the header
+- Or go to `cart.php`
+- You can update quantity or remove items
 
-### 5. Thanh toán
-- Từ giỏ hàng, click "Thanh toán"
-- Điền thông tin giao hàng
-- Chọn phương thức thanh toán
-- Submit để đặt hàng
+### 5. Checkout
+- From the cart, click "Checkout"
+- Fill in shipping information
+- Select payment method
+- Submit to place the order
 
 ### 6. Admin Panel
-- Đăng nhập với tài khoản admin
-- Truy cập `admin/index.php`
-- Quản lý:
-  - **Dashboard:** Xem thống kê tổng quan
-  - **Sản phẩm:** Thêm/sửa/xóa sản phẩm
-  - **Đơn hàng:** Xem và cập nhật trạng thái đơn hàng
-  - **Danh mục:** Quản lý danh mục sản phẩm
+- Log in with an admin account
+- Go to `admin/index.php`
+- Manage:
+  - **Dashboard:** View overview statistics
+  - **Products:** Add/edit/delete products
+  - **Orders:** View and update order status
+  - **Categories:** Manage product categories
 
-## Tính năng bảo mật
+## Security Features
 
-- ✅ Password hashing với `password_hash()` / `password_verify()`
-- ✅ Prepared statements để chống SQL injection
+- ✅ Password hashing with `password_hash()` / `password_verify()`
+- ✅ Prepared statements to prevent SQL injection
 - ✅ Session management
 - ✅ Input sanitization
 - ✅ Role-based access control (admin vs customer)
 
-## Lưu ý
+## Notes
 
-1. **Session:** Giỏ hàng sử dụng session, sẽ mất khi đóng trình duyệt (có thể nâng cấp lưu vào database)
-2. **File upload:** Hiện tại chỉ hỗ trợ URL ảnh, chưa có upload file
-3. **Payment:** Chưa tích hợp gateway thanh toán thực tế
-4. **Email:** Chưa có gửi email xác nhận đơn hàng
+1. **Session:** Cart uses session; it is cleared when the browser is closed (can be upgraded to save in database)
+2. **File upload:** Currently only image URL is supported; file upload is not implemented
+3. **Payment:** No real payment gateway integrated yet
+4. **Email:** No order confirmation email
 
-## Tích hợp vào trang hiện tại
+## Integration
 
-Để thêm nút "Thêm vào giỏ hàng" vào trang sản phẩm (ví dụ Sweet Shop):
+To add an "Add to Cart" button on a product page (e.g. Sweet Shop):
 
 ```php
 <?php
@@ -119,13 +119,13 @@ $products = getProductsByCategory(3); // Category ID 3 = Sweet Shop
 <?php foreach ($products as $product): ?>
     <div class="product-card">
         <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
-        <p>Giá: <?php echo formatCurrency($product['price']); ?></p>
+        <p>Price: <?php echo formatCurrency($product['price']); ?></p>
         
         <form method="POST" action="add_to_cart.php">
             <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
             <input type="hidden" name="quantity" value="1">
             <input type="hidden" name="redirect" value="componets/sweet-shop.php">
-            <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
         </form>
     </div>
 <?php endforeach; ?>
@@ -133,23 +133,23 @@ $products = getProductsByCategory(3); // Category ID 3 = Sweet Shop
 
 ## Troubleshooting
 
-### Lỗi kết nối database
-- Kiểm tra XAMPP đã chạy MySQL
-- Kiểm tra `database/config.php` có đúng thông tin
-- Kiểm tra database `project_data` đã được tạo
+### Database connection error
+- Check that XAMPP MySQL is running
+- Check `database/config.php` has correct credentials
+- Check that database `project_data` has been created
 
-### Session không hoạt động
-- Đảm bảo `session_start()` được gọi ở đầu file
-- Kiểm tra PHP session path có quyền ghi
+### Session not working
+- Ensure `session_start()` is called at the top of the file
+- Check that PHP session path is writable
 
-### Không đăng nhập được
-- Kiểm tra password đã được hash đúng chưa
-- Kiểm tra username/email có tồn tại trong database
+### Cannot log in
+- Check that password is hashed correctly
+- Check that username/email exists in the database
 
-## Hỗ trợ
+## Support
 
-Nếu gặp vấn đề, kiểm tra:
+If you encounter issues, check:
 1. PHP error logs
 2. MySQL error logs
 3. Browser console (F12)
-4. Network tab để xem request/response
+4. Network tab for request/response

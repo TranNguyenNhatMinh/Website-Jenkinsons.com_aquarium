@@ -1,6 +1,6 @@
 <?php
 /**
- * Simple Admin Test - Không có requireAdmin để test
+ * Simple Admin Test - No requireAdmin for testing
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -26,19 +26,19 @@ if (isLoggedIn()) {
     echo "</pre>";
     
     if ($user['role'] === 'admin' || isAdmin()) {
-        echo "<h2 style='color: green;'>✅ Bạn là ADMIN! Có thể vào trang admin.</h2>";
-        echo "<p><a href='index.php'>Vào Admin Dashboard</a></p>";
+        echo "<h2 style='color: green;'>✅ You are ADMIN! You can access the admin panel.</h2>";
+        echo "<p><a href='index.php'>Go to Admin Dashboard</a></p>";
     } else {
-        echo "<h2 style='color: red;'>❌ Bạn KHÔNG phải admin.</h2>";
-        echo "<p>Role trong database: <strong>" . htmlspecialchars($user['role']) . "</strong></p>";
-        echo "<p>Role trong session: <strong>" . htmlspecialchars($_SESSION['role'] ?? 'not set') . "</strong></p>";
-        echo "<p><a href='../make_admin.php'>Set thành admin</a></p>";
+        echo "<h2 style='color: red;'>❌ You are NOT an admin.</h2>";
+        echo "<p>Role in database: <strong>" . htmlspecialchars($user['role']) . "</strong></p>";
+        echo "<p>Role in session: <strong>" . htmlspecialchars($_SESSION['role'] ?? 'not set') . "</strong></p>";
+        echo "<p><a href='../make_admin.php'>Set as admin</a></p>";
     }
 } else {
-    echo "<h2 style='color: red;'>❌ Bạn chưa đăng nhập!</h2>";
-    echo "<p><a href='../login.php'>Đăng nhập</a></p>";
+    echo "<h2 style='color: red;'>❌ You are not logged in!</h2>";
+    echo "<p><a href='../login.php'>Log in</a></p>";
 }
 
 echo "<hr>";
-echo "<p><a href='../index.php'>Về trang chủ</a></p>";
+echo "<p><a href='../index.php'>Back to homepage</a></p>";
 ?>

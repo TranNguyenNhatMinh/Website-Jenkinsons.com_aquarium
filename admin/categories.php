@@ -6,7 +6,7 @@ requireAdmin();
 
 $conn = getDBConnection();
 
-// Xử lý thêm/sửa/xóa
+// Add / Edit / Delete
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_category'])) {
         $category_name = sanitize($_POST['category_name']);
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Lấy danh sách danh mục
+// Fetch categories list
 $result = $conn->query("SELECT * FROM categories ORDER BY display_order ASC, category_name ASC");
 $categories = [];
 while ($row = $result->fetch_assoc()) {
@@ -74,11 +74,11 @@ if (isset($_GET['edit'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục - Admin</title>
+    <title>Manage Categories - Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../css/variables.css">
@@ -91,17 +91,20 @@ if (isset($_GET['edit'])) {
             
             <div class="admin-content">
                 <div class="admin-header">
-                    <h2><i class="fa-solid fa-folder me-2"></i>Quản lý danh mục</h2>
+                    <button type="button" class="admin-menu-toggle" id="adminMenuToggle" aria-label="Open menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h2><i class="fa-solid fa-folder"></i> Categories</h2>
                 </div>
                 
                 <?php if (isset($_GET['success'])): ?>
-                    <div class="alert alert-success">Thao tác thành công!</div>
+                    <div class="alert alert-success">Action completed successfully!</div>
                 <?php endif; ?>
                 
-                <!-- Form thêm/sửa -->
+                <!-- Add / Edit form -->
                 <div class="admin-form-card mb-4">
                     <div class="card-header">
-                        <h5><i class="fa-solid fa-<?php echo $edit_category ? 'edit' : 'plus'; ?> me-2"></i><?php echo $edit_category ? 'Sửa danh mục' : 'Thêm danh mục mới'; ?></h5>
+                        <h5><i class="fa-solid fa-<?php echo $edit_category ? 'edit' : 'plus'; ?> me-2"></i><?php echo $edit_category ? 'Edit Category' : 'Add New Category'; ?></h5>
                     </div>
                     <div>
                         <form method="POST">
@@ -111,7 +114,7 @@ if (isset($_GET['edit'])) {
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Tên danh mục *</label>
+                                    <label class="form-label">Category Name *</label>
                                     <input type="text" class="form-control" name="category_name" value="<?php echo $edit_category ? htmlspecialchars($edit_category['category_name']) : ''; ?>" required>
                                 </div>
                                 
@@ -122,46 +125,46 @@ if (isset($_GET['edit'])) {
                             </div>
                             
                             <div class="mb-3">
-                                <label class="form-label">Mô tả</label>
+                                <label class="form-label">Description</label>
                                 <textarea class="form-control" name="description" rows="3"><?php echo $edit_category ? htmlspecialchars($edit_category['description']) : ''; ?></textarea>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Ảnh (URL)</label>
+                                    <label class="form-label">Image (URL)</label>
                                     <input type="text" class="form-control" name="image" value="<?php echo $edit_category ? htmlspecialchars($edit_category['image']) : ''; ?>">
                                 </div>
                                 
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">Thứ tự hiển thị</label>
+                                    <label class="form-label">Display Order</label>
                                     <input type="number" class="form-control" name="display_order" value="<?php echo $edit_category ? $edit_category['display_order'] : '0'; ?>">
                                 </div>
                                 
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label">Trạng thái</label>
+                                    <label class="form-label">Status</label>
                                     <select class="form-select" name="status">
-                                        <option value="active" <?php echo ($edit_category && $edit_category['status'] == 'active') ? 'selected' : ''; ?>>Hoạt động</option>
-                                        <option value="inactive" <?php echo ($edit_category && $edit_category['status'] == 'inactive') ? 'selected' : ''; ?>>Không hoạt động</option>
+                                        <option value="active" <?php echo ($edit_category && $edit_category['status'] == 'active') ? 'selected' : ''; ?>>Active</option>
+                                        <option value="inactive" <?php echo ($edit_category && $edit_category['status'] == 'inactive') ? 'selected' : ''; ?>>Inactive</option>
                                     </select>
                                 </div>
                             </div>
                             
                             <button type="submit" name="<?php echo $edit_category ? 'update_category' : 'add_category'; ?>" class="admin-btn admin-btn-primary">
-                                <i class="fa-solid fa-<?php echo $edit_category ? 'save' : 'plus'; ?> me-2"></i><?php echo $edit_category ? 'Cập nhật' : 'Thêm mới'; ?>
+                                <i class="fa-solid fa-<?php echo $edit_category ? 'save' : 'plus'; ?> me-2"></i><?php echo $edit_category ? 'Update' : 'Add New'; ?>
                             </button>
                             
                             <?php if ($edit_category): ?>
-                                <a href="categories.php" class="admin-btn admin-btn-secondary ms-2">Hủy</a>
+                                <a href="categories.php" class="admin-btn admin-btn-secondary ms-2">Cancel</a>
                             <?php endif; ?>
                         </form>
                     </div>
                 </div>
                 
-                <!-- Danh sách danh mục -->
+                <!-- Categories list -->
                 <div class="admin-table">
                     <div class="card-header" style="padding: 1.5rem; background: white; border-bottom: 2px solid #f0f0f0;">
                         <h5 style="margin: 0; font-weight: 700; color: #1e3a5f;">
-                            <i class="fa-solid fa-list me-2"></i>Danh sách danh mục
+                            <i class="fa-solid fa-list me-2"></i>Category List
                         </h5>
                     </div>
                     <div class="table-responsive">
@@ -169,11 +172,11 @@ if (isset($_GET['edit'])) {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên danh mục</th>
+                                        <th>Category Name</th>
                                         <th>Slug</th>
-                                        <th>Thứ tự</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
+                                        <th>Order</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -190,12 +193,12 @@ if (isset($_GET['edit'])) {
                                             </td>
                                             <td>
                                                 <a href="?edit=<?php echo $category['category_id']; ?>" class="admin-btn admin-btn-warning admin-btn-sm">
-                                                    <i class="fa-solid fa-edit me-1"></i>Sửa
+                                                    <i class="fa-solid fa-edit me-1"></i>Edit
                                                 </a>
-                                                <form method="POST" style="display:inline;" onsubmit="return confirm('Bạn có chắc muốn xóa?');">
+                                                <form method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete?');">
                                                     <input type="hidden" name="category_id" value="<?php echo $category['category_id']; ?>">
                                                     <button type="submit" name="delete_category" class="admin-btn admin-btn-danger admin-btn-sm ms-1">
-                                                        <i class="fa-solid fa-trash me-1"></i>Xóa
+                                                        <i class="fa-solid fa-trash me-1"></i>Delete
                                                     </button>
                                                 </form>
                                             </td>
